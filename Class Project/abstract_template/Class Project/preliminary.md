@@ -1,0 +1,5 @@
+Title: Application of Bayesian approach to inverse problems to partial differential equations with high-dimensional state variables, with focus in fluid mechanics
+
+Inverse problems aim to determine the function parameters from the mathematical model and the data, which is often limited and noisy. Bayesian statistics provides a valuable perspective to evaluate the posterior of function parameters based on the model and the data. Often manifested in climate modelling, inverse problem is termed "data assimilation" where the statistical analysis, or learning, of model parameters through the reanalysis of observed data. In the context of the emerging field urbam fluid mechanics, one of the key question is how to make the best use of the more readily available measurements both from station measurements and also mobile data. Therefore, the study of Bayesian approach to inverse problems to partial differential equations with high-dimensional state variables presents great significance.
+
+​	

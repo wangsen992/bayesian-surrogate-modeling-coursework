@@ -1,0 +1,16 @@
+\begin{thebibliography}{1}
+
+\bibitem{Murphy2001}
+K.~P. Murphy, ``Bayes net toolbox for matlab.''
+  \url{https://github.com/bayesnet/bnt}, 2001.
+
+\bibitem{Bishop:2006}
+C.~M. Bishop, {\em Pattern Recognition and Machine Learning}.
+\newblock Springer, 2006.
+\newblock \url{http://research.microsoft.com/en-us/um/people/cmbishop/prml/}.
+
+\bibitem{Murphy2012}
+K.~P. Murphy, {\em {Machine learning: a probabilistic perspective}}.
+\newblock MIT Press, 2012.
+
+\end{thebibliography}

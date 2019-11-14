@@ -1,0 +1,1366 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{HW3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{homework-3}{%
+\section{Homework 3}\label{homework-3}}
+
+\hypertarget{machine-learning}{%
+\subsection{Machine Learning}\label{machine-learning}}
+
+\hypertarget{sen-wang}{%
+\subsection{Sen Wang}\label{sen-wang}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{!}pip install mat4py
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Requirement already satisfied: mat4py in /Users/senwang/miniconda3/envs/basemap/lib/python3.6/site-packages/mat4py-0.4.2-py3.6.egg (0.4.2)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{optimize}\PY{p}{,} \PY{n}{linalg}
+        \PY{k+kn}{from} \PY{n+nn}{mat4py} \PY{k}{import} \PY{n}{loadmat}
+        
+        \PY{k+kn}{import} \PY{n+nn}{ipdb} \PY{k}{as} \PY{n+nn}{debugger}
+\end{Verbatim}
+
+
+    \hypertarget{problem-1-robust-linear-regression}{%
+\section{Problem 1: Robust Linear
+Regression}\label{problem-1-robust-linear-regression}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}627}]:} \PY{c+c1}{\PYZsh{} load data}
+          \PY{n}{p1\PYZus{}data} \PY{o}{=} \PY{n}{loadmat}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HW3\PYZus{}data/P1/P1.mat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} unpack data}
+          \PY{n}{Xtrain} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p1\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Xtrain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{Xtest} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p1\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Xtest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p1\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{dof} \PY{o}{=} \PY{n}{p1\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dof}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{sigma2} \PY{o}{=} \PY{n}{p1\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigma2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}628}]:} \PY{n}{p1\PYZus{}data}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}628}]:} dict\_keys(['dof', 'sigma2', 'y', 'Xtrain', 'Xtest'])
+\end{Verbatim}
+            
+    \hypertarget{part-1-linear-regression-with-least-squares}{%
+\subsection{Part 1: Linear regression with least
+squares}\label{part-1-linear-regression-with-least-squares}}
+
+As we have proven from the previous homework, the solution for the
+coefficients in linear regression is expressed as below,
+
+\(\mathbf{w} = (\Phi_c^T\Phi)c)^{-1}\Phi_c\mathbf{t}_c\), where MLE of
+\(w_0 = \bar{t} - \bar{\Phi}^T\mathbf{w}\)
+
+Note that the plot is compiled together with the rest of the problem.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}629}]:} \PY{n}{X} \PY{o}{=} \PY{n}{Xtrain}
+          \PY{n}{X\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+          \PY{n}{X\PYZus{}c} \PY{o}{=} \PY{n}{X} \PY{o}{\PYZhy{}} \PY{n}{X\PYZus{}mean}
+          
+          \PY{n}{y\PYZus{}mean} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+          \PY{n}{y\PYZus{}c} \PY{o}{=} \PY{n}{y} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}mean}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}630}]:} \PY{n}{w1\PYZus{}ls} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{X\PYZus{}c}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{X\PYZus{}c}\PY{p}{)} \PY{o}{@} \PY{n}{X\PYZus{}c}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{y\PYZus{}c}\PY{p}{)}
+          \PY{n}{w0\PYZus{}ls} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{y\PYZus{}mean} \PY{o}{\PYZhy{}} \PY{n}{X\PYZus{}mean} \PY{o}{*} \PY{n}{w1\PYZus{}ls}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{part-2-linear-regression-with-heavy-tails}{%
+\subsection{Part 2: Linear regression with heavy
+tails}\label{part-2-linear-regression-with-heavy-tails}}
+
+When Laplace distribution instead of Gaussian distribution is used for
+the likelihood, the new likelihood is expressed as below,
+
+\(p(\mathcal{D}|\mathbf{w}) = \prod_n^N\frac{1}{N}\frac{1}{2b}\exp(-\frac{|w_0 + w_1x_n - y_n|}{b})\)
+
+If we take derivative of the log-likelihood with respect to
+\(\mathbf{w}\), provided data are centered, the error function is then,
+
+\(\frac{dE(w_1)}{dw_1} = \sum_n^N|w_1\hat{x}_{n} - \hat{y}_n|\)
+
+where,
+
+\$\begin{align}
+    \hat{x}_n &= x_n - \bar{x}\\
+    \hat{y}_n &= y_n - \bar{y}
+\end{align} \$
+
+And the bias is obtained as simply \(w_0 = \bar{y} - w_1\bar{x}\)
+
+Solution requires linear programming of the form:
+\(r_i \triangleq r_i^+ - r_i^-\)
+
+\(\min_{\mathbf{w}, r_i^+, r_i^-}\sum_{i}(r_i^++r_i^-)\ \text{  s.t.  } r_i^+\geq 0,r_i^-\geq 0, \mathbf{w}^T\mathbf{x_i} + r_i^+-r_i^- = t_i\)
+
+and
+
+\(r_i^+ = \frac{1}{2}(r_i + |r_i|), r_i^- = \frac{1}{2}(|r_i|-r_i), |r_i| = r_i^+ + r_i^-\)
+
+The algorithm is applied with \texttt{scipy.optimize.linprog} and
+variables named according to
+\href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.linprog.html}{documentation
+convention}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}634}]:} \PY{c+c1}{\PYZsh{} construt linear programming variables}
+          \PY{n}{N} \PY{o}{=} \PY{n}{Xtrain}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+          \PY{n}{A\PYZus{}eq} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{X}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{eye}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{b\PYZus{}eq} \PY{o}{=} \PY{n}{y}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{bounds} \PY{o}{=} \PY{p}{[}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}\PY{p}{,}\PY{p}{(}\PY{k+kc}{None}\PY{p}{,} \PY{k+kc}{None}\PY{p}{)}\PY{p}{]}\PY{o}{+}\PY{p}{[}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{k+kc}{None}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{N}\PY{p}{)}\PY{p}{]}
+          \PY{n}{res} \PY{o}{=} \PY{n}{optimize}\PY{o}{.}\PY{n}{linprog}\PY{p}{(}\PY{n}{c}\PY{p}{,} \PY{n}{A\PYZus{}eq}\PY{o}{=}\PY{n}{A\PYZus{}eq}\PY{p}{,} \PY{n}{b\PYZus{}eq}\PY{o}{=}\PY{n}{b\PYZus{}eq}\PY{p}{,} \PY{n}{bounds}\PY{o}{=}\PY{n}{bounds}\PY{p}{,} \PY{n}{options}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{disp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{k+kc}{True}\PY{p}{\PYZcb{}}\PY{p}{)}
+          \PY{n}{w1\PYZus{}la} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{w0\PYZus{}la} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Optimization terminated successfully.
+         Current function value: 23.555874   
+         Iterations: 31
+
+    \end{Verbatim}
+
+    \hypertarget{part-3-huber-loss-function}{%
+\subsection{Part 3: Huber Loss
+function}\label{part-3-huber-loss-function}}
+
+Using gradient descent method, the gradient can be calculated as,
+\(\nabla L_H = \begin{cases}\begin{pmatrix}w_0 + w_1x_i - y_i \\ w_0x_i + w_1x_i^2 - y_ix_i \end{pmatrix}\ \ \text{if $|r_i|\leq\delta$}\\ \begin{pmatrix}\delta\\ \delta x_i\end{pmatrix}\ \ \text{if $|r_i|>\delta$}\end{cases}\)
+
+So apply gradient descent:
+\(\mathbf{w}^{(\tau+1)} = \mathbf{w}^{(\tau)} - \eta\nabla L_H\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}638}]:} \PY{n}{err\PYZus{}new} \PY{o}{=} \PY{l+m+mi}{100}
+          \PY{n}{err\PYZus{}old} \PY{o}{=} \PY{l+m+mi}{200}
+          \PY{n}{thres} \PY{o}{=} \PY{l+m+mf}{0.0001}
+          \PY{n}{eta} \PY{o}{=} \PY{l+m+mf}{0.01}
+          
+          \PY{c+c1}{\PYZsh{} delta = 1.0}
+          \PY{n}{w0\PYZus{}1} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{w1\PYZus{}1} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{delta1} \PY{o}{=} \PY{l+m+mf}{1.0}
+          \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{err\PYZus{}record} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{while} \PY{n}{err\PYZus{}old} \PY{o}{\PYZhy{}} \PY{n}{err\PYZus{}new} \PY{o}{\PYZgt{}} \PY{n}{thres}\PY{p}{:}  
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{r\PYZus{}i} \PY{o}{=} \PY{n}{w0\PYZus{}1} \PY{o}{+} \PY{n}{w1\PYZus{}1} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{k}{if} \PY{n}{r\PYZus{}i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{delta1}\PY{p}{:}
+                      \PY{n}{w0\PYZus{}1} \PY{o}{=} \PY{n}{w0\PYZus{}1} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{r\PYZus{}i}
+                      \PY{n}{w1\PYZus{}1} \PY{o}{=} \PY{n}{w1\PYZus{}1} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{r\PYZus{}i} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{w0\PYZus{}1} \PY{o}{=} \PY{n}{w0\PYZus{}1} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{delta1}
+                      \PY{n}{w1\PYZus{}1} \PY{o}{=} \PY{n}{w1\PYZus{}1} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{delta1} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{c+c1}{\PYZsh{} calculate new error in huber loss function}
+              \PY{n}{err\PYZus{}old} \PY{o}{=} \PY{n}{err\PYZus{}new}
+              \PY{n}{err\PYZus{}new} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{r\PYZus{}i} \PY{o}{=} \PY{n}{w0\PYZus{}1} \PY{o}{+} \PY{n}{w1\PYZus{}1} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{n}{err\PYZus{}new} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{w0\PYZus{}1} \PY{o}{+} \PY{n}{w1\PYZus{}1}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{if} \PY{n}{r\PYZus{}i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{delta1} \PY{k}{else} \PY{n}{delta1} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{w0\PYZus{}1} \PY{o}{+} \PY{n}{w1\PYZus{}1}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{delta1}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}
+              \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+              \PY{n}{err\PYZus{}record}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{err\PYZus{}new}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}print(\PYZdq{}Iteration \PYZob{}\PYZcb{}, current error level: \PYZob{}\PYZcb{}\PYZdq{}.format(counter, err\PYZus{}new))}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total number of iteration: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{counter}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Final error level: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{err\PYZus{}new}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} delta = 5.0}
+          \PY{n}{err\PYZus{}new} \PY{o}{=} \PY{l+m+mi}{100}
+          \PY{n}{err\PYZus{}old} \PY{o}{=} \PY{l+m+mi}{200}
+          
+          \PY{n}{w0\PYZus{}2} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{w1\PYZus{}2} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{delta2} \PY{o}{=} \PY{l+m+mf}{5.0}
+          \PY{n}{counter} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{n}{err\PYZus{}record} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{while} \PY{n}{err\PYZus{}old} \PY{o}{\PYZhy{}} \PY{n}{err\PYZus{}new} \PY{o}{\PYZgt{}} \PY{n}{thres}\PY{p}{:}  
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{r\PYZus{}i} \PY{o}{=} \PY{n}{w0\PYZus{}2} \PY{o}{+} \PY{n}{w1\PYZus{}2} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{k}{if} \PY{n}{r\PYZus{}i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{delta1}\PY{p}{:}
+                      \PY{n}{w0\PYZus{}2} \PY{o}{=} \PY{n}{w0\PYZus{}2} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{r\PYZus{}i}
+                      \PY{n}{w1\PYZus{}2} \PY{o}{=} \PY{n}{w1\PYZus{}2} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{r\PYZus{}i} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n}{w0\PYZus{}2} \PY{o}{=} \PY{n}{w0\PYZus{}2} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{delta2}
+                      \PY{n}{w1\PYZus{}2} \PY{o}{=} \PY{n}{w1\PYZus{}2} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{delta2} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+              
+              \PY{c+c1}{\PYZsh{} calculate new error in huber loss function}
+              \PY{n}{err\PYZus{}old} \PY{o}{=} \PY{n}{err\PYZus{}new}
+              \PY{n}{err\PYZus{}new} \PY{o}{=} \PY{l+m+mi}{0}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{r\PYZus{}i} \PY{o}{=} \PY{n}{w0\PYZus{}2} \PY{o}{+} \PY{n}{w1\PYZus{}2} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{n}{err\PYZus{}new} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{w0\PYZus{}2} \PY{o}{+} \PY{n}{w1\PYZus{}2}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{if} \PY{n}{r\PYZus{}i} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{delta2} \PY{k}{else} \PY{n}{delta2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{n}{w0\PYZus{}2} \PY{o}{+} \PY{n}{w1\PYZus{}2}\PY{o}{*}\PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{delta2}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{2}
+              \PY{n}{counter} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+              \PY{n}{err\PYZus{}record}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{err\PYZus{}new}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}print(\PYZdq{}Iteration \PYZob{}\PYZcb{}, current error level: \PYZob{}\PYZcb{}\PYZdq{}.format(counter, err\PYZus{}new))}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Total number of iteration: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{counter}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Final error level: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{err\PYZus{}new}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Total number of iteration: 540
+Final error level: 20.555999571888442
+Total number of iteration: 76
+Final error level: 82.8212211636214
+
+    \end{Verbatim}
+
+    \hypertarget{compiled-plots-and-discussion}{%
+\subsubsection{Compiled plots and
+discussion}\label{compiled-plots-and-discussion}}
+
+From the figure below, it can be clearly observed that the least square
+solution is heavily influenced by the outliers, and Laplace solution
+provides a robust regression.
+
+In terms of regression using the Huber loss function, it can be observed
+that solution with \(\delta=1.0\) gives a much better result than that
+with \(\delta=5.0\), which is due to the smaller region for quadratic
+error, therefore less prone to the effect of outliers.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}641}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{train}\PY{p}{,} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{Xtrain}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ls}\PY{p}{,} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{w0\PYZus{}ls} \PY{o}{+} \PY{n}{w1\PYZus{}ls} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Least Square}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{la}\PY{p}{,} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{w0\PYZus{}la} \PY{o}{+} \PY{n}{w1\PYZus{}la} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Laplace}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{hu1}\PY{p}{,} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{w0\PYZus{}1} \PY{o}{+} \PY{n}{w1\PYZus{}1} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Huber delta=1.0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{hu2}\PY{p}{,} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{n}{w0\PYZus{}2} \PY{o}{+} \PY{n}{w1\PYZus{}2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Huber delta=5.0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          
+          \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{handles}\PY{o}{=}\PY{p}{[}\PY{n}{train}\PY{p}{,} \PY{n}{ls}\PY{p}{,} \PY{n}{la}\PY{p}{,} \PY{n}{hu1}\PY{p}{,} \PY{n}{hu2}\PY{p}{]}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Compiled plots of linear regression using different error function}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{problem-2-online-training-in-linear-regression}{%
+\section{Problem 2: Online training in linear
+regression}\label{problem-2-online-training-in-linear-regression}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}660}]:} \PY{n}{p2\PYZus{}data} \PY{o}{=} \PY{n}{loadmat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{HW3\PYZus{}data/P2/P2.mat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{p2\PYZus{}data}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+dict\_keys(['X', 'y'])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}661}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p2\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p2\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{part-a-online-learning}{%
+\subsection{Part A: Online learning}\label{part-a-online-learning}}
+
+Online learning using the least mean squares error is performed below
+and the plots of error evolution and the fit are also presented
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}662}]:} \PY{n}{epoch\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{60}
+          \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+          \PY{n}{eta} \PY{o}{=} \PY{l+m+mf}{0.0001}
+          \PY{n}{err\PYZus{}record} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epoch\PYZus{}num}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{r\PYZus{}i} \PY{o}{=} \PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{r\PYZus{}i} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}
+                  \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{r\PYZus{}i} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+              \PY{c+c1}{\PYZsh{} calualte error}
+              \PY{n}{err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{err\PYZus{}record}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{err}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}663}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{semilogy}\PY{p}{(}\PY{n}{err\PYZus{}record}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error \PYZhy{} online learning, eta=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{eta}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{,} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fit with online learning}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Online learning provides a good fit and the convergence plot shows that
+the solution continuously converge with a steady rate until reaching a
+plateau is reached.
+
+    \hypertarget{part-b-batch-learning-with-batch-size-of-5}{%
+\subsection{Part B: Batch Learning with batch size of
+5}\label{part-b-batch-learning-with-batch-size-of-5}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}668}]:} \PY{n}{epoch\PYZus{}num} \PY{o}{=} \PY{l+m+mi}{60}
+          \PY{n}{n} \PY{o}{=} \PY{l+m+mi}{5}
+          \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n+nb}{float}\PY{p}{)}
+          \PY{n}{eta} \PY{o}{=} \PY{l+m+mf}{0.0001}
+          \PY{n}{err\PYZus{}record} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epoch\PYZus{}num}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{dw0} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{eta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{n}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{n}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{dw1} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{eta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{n}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{n}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{n}{n}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{=} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{dw0}
+                  \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{n}{dw1}
+              \PY{c+c1}{\PYZsh{} calualte error}
+              \PY{n}{err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{err\PYZus{}record}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{err}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{final error level: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{err}\PY{p}{)}\PY{o}{/}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+final error level: 0.30469558256154106
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}669}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{semilogy}\PY{p}{(}\PY{n}{err\PYZus{}record}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error \PYZhy{} batch size = 5, eta=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{eta}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{,} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{+} \PY{n}{w}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fit with batch learning, n=5}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It can be observed that when batch learning is used, the error does not
+converge at a steady rate. Instead, there is an increasing rate of
+learning at the initial stage and it also has a much smoother transition
+to the plateau.
+
+    \hypertarget{problem-3-least-squares-formalism-to-classification}{%
+\section{Problem 3: Least squares formalism to
+classification}\label{problem-3-least-squares-formalism-to-classification}}
+
+    \hypertarget{part-a}{%
+\subsection{Part A}\label{part-a}}
+
+For the problem described above, evaluate the parameter matrix
+\(\mathbf{W}\) by minimizing a sum-of-squares error function.
+
+    Given that \(\mathbf{y}(\mathbf{x}) = \mathbf{W}\mathbf{x}\), the error
+is therefore defined as,
+
+\(E_D(\mathbf{W}) = \frac{1}{2}\text{Tr}\{(\mathbf{W}\mathbf{x} - \mathbf{y})^T(\mathbf{W}\mathbf{x} - \mathbf{y})\}\)
+which then gives the solution through minimization,
+
+\(\mathbf{W} = (\mathbf{x}^T\mathbf{x})^{-1}\mathbf{x}^T\mathbf{y}\)
+
+    \hypertarget{part-b-compute-decision-boundary}{%
+\subsection{Part B: Compute decision
+boundary}\label{part-b-compute-decision-boundary}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}670}]:} \PY{c+c1}{\PYZsh{}load data}
+          \PY{n}{p3\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HW3\PYZus{}data/P3/P3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{X} \PY{o}{=} \PY{n}{p3\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+          \PY{n}{y} \PY{o}{=} \PY{n}{p3\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+    The provided dataset is visualised through a quick scatter plot.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}673}]:} \PY{c+c1}{\PYZsh{} visualize given data}
+          \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dataset visualization}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}687}]:} \PY{c+c1}{\PYZsh{} Construct classification problem}
+          \PY{n}{XX} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{X}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{n}{YY} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+              \PY{n}{YY}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n+nb}{int}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+          \PY{n}{W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{XX}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{XX}\PY{p}{)} \PY{o}{@} \PY{n}{XX}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{YY}
+\end{Verbatim}
+
+
+    Then, the decision boundary is obtained through
+
+\((\mathbf{w}_1 - \mathbf{w}_2)^T\mathbf{x} + w_{10} - w_{20} = 0\)
+
+It is implemented below in the code.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}689}]:} \PY{c+c1}{\PYZsh{} decision boundary}
+          \PY{n}{x\PYZus{}db} \PY{o}{=} \PY{k}{lambda} \PY{n}{x1}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{p}{(}\PY{p}{(}\PY{n}{W}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{n}{W}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{x1} \PY{o}{+} \PY{n}{W}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{W}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{W}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{W}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}690}]:} \PY{c+c1}{\PYZsh{} Plot decision boundary}
+          \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{4.5}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,} \PY{n}{x\PYZus{}db}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mf}{4.5}\PY{p}{,}\PY{l+m+mf}{4.5}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Result of least square based classification}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the plot above, it can be observed that the decision boundary
+successfully classified two classes.
+
+    \hypertarget{problem-4-logistic-regression-for-multiclass-classification}{%
+\section{Problem 4: Logistic Regression for multiclass
+classification}\label{problem-4-logistic-regression-for-multiclass-classification}}
+
+    \hypertarget{part-a}{%
+\subsection{Part A}\label{part-a}}
+
+Show that for a linearly separable data set, the maximum likelihood
+solution for the logistic regression model is obtained by finding a
+vector w whose decision boundary wT φ (x) = 0 separates the classes and
+then taking the magnitude of w to infinity.
+
+    For logistic regression, the class probability is given as
+\(p(C_k|\mathbf{x}) = \sigma(\mathbf{w}^T\mathbf{x})\), where
+\(\sigma(a)\) is the sigmoid function. For a linearly separable data
+set, for example using a binary classification, class probability
+becomes,
+
+\(p(C_0|\mathbf{x}) = p(C_1|\mathbf{x}) = \sigma(\mathbf{w}^T\mathbf{x}) = 0.5\)
+
+which gives \(\mathbf{w}^T\mathbf{x} = 0\)
+
+In addition, after we take derivative of the likelihood, we have,
+
+\(\nabla E(\mathbf{w}) = \sum_{n=1}^N(y_n - t_n)\mathbf{x}_n = 0\)
+
+so we can arrive at the relation,
+
+\(y_n = \sigma(\mathbf{w}^T\mathbf{x}_n) = t_n\)
+
+Therefore, \(y_n\) can only be \(0\) or \(1\). In this case, the
+magnitude of \(\mathbf{w}\) goes to infinity.
+
+    \hypertarget{part-b}{%
+\subsection{Part B}\label{part-b}}
+
+Show that the Hessian matrix H is positive definite. Hence show that the
+error function is a convex function of w and that it has a unique
+minimum.
+
+    To show the Hessian matrix is positive definite, we need to show that
+for any vector \(\mathbf{u}\),
+\(\mathbf{u}^T\mathbf{H}\mathbf{u}>0\).Proof as shown below.
+
+\(\begin{align} \mathbf{u}^T\mathbf{H}\mathbf{u} &= \mathbf{u}^T\boldsymbol{\Phi}^T\mathbf{R}\boldsymbol{\Phi}\mathbf{u}\\ &= u_m\phi_m^n r_n \phi_m^n u_m \\ &= u_m^2 (\phi_m^n)^2 r_n > 0\ \ \text{(QED)}\end{align}\)
+
+    \hypertarget{part-c}{%
+\subsection{Part C}\label{part-c}}
+
+Write a code for implementing the iterative rewrighted least squares
+algorithm for logistic regression. Use this to find and plot the
+decision boundary corresponding to the data set given in this link.
+Compare the results with those obtained using least squares based
+classification.
+
+    First we load the data and have a quick plot of the dataset. We can see
+there are three classes.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}691}]:} \PY{n}{p4\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{loadtxt}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HW3\PYZus{}data/P4/P4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{delimiter}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{X} \PY{o}{=} \PY{n}{p4\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{l+m+mi}{2}\PY{p}{]}
+          \PY{n}{y} \PY{o}{=} \PY{n}{p4\PYZus{}data}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+m+mi}{3}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}693}]:} \PY{c+c1}{\PYZsh{} Visualize data}
+          \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Dataset visualization}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_46_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}698}]:} \PY{c+c1}{\PYZsh{} Construct IRLS}
+          \PY{n}{M} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{+} \PY{l+m+mi}{1}
+          \PY{n}{K} \PY{o}{=} \PY{l+m+mi}{3}
+          \PY{n}{N} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{lam} \PY{o}{=} \PY{l+m+mf}{1e\PYZhy{}8} \PY{c+c1}{\PYZsh{} regularization coeff}
+          
+          \PY{n}{Phi} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,}\PY{n}{X}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+          \PY{n}{T} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{N}\PY{p}{,}\PY{n}{K}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{y}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+              \PY{n}{T}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+          
+          \PY{c+c1}{\PYZsh{} Initialise W, Y, g and H}
+          \PY{n}{W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{K}\PY{p}{)}\PY{p}{)}
+          \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{T}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+          \PY{n}{g} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{K}\PY{p}{)}\PY{p}{)}
+          \PY{n}{H} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{)}
+          
+          \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+              \PY{n}{denom} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{W}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{Phi}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{n}\PY{p}{:}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{Y}\PY{p}{[}\PY{n}{n}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{W}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{n}{k}\PY{p}{:}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{@} \PY{n}{Phi}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{n}\PY{p}{:}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{denom}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}699}]:} \PY{c+c1}{\PYZsh{} start training}
+          \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{1000}
+          \PY{n}{err\PYZus{}record} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{eta} \PY{o}{=} \PY{l+m+mf}{0.005}
+          \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+              \PY{c+c1}{\PYZsh{} construct g}
+              \PY{k}{for} \PY{n}{m} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{g}\PY{p}{[}\PY{n}{m}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{Phi}\PY{p}{[}\PY{n}{m}\PY{p}{:}\PY{n}{m}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{@} \PY{p}{(}\PY{n}{Y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{T}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} construct H}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{M}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{if} \PY{n}{j} \PY{o}{==} \PY{n}{k}\PY{p}{:}
+                          \PY{n}{H}\PY{p}{[}\PY{n}{j}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{n}{Y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{Y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{n}{Phi}\PY{p}{[}\PY{n}{j}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n}{Phi}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+                      \PY{k}{else}\PY{p}{:}
+                          \PY{n}{H}\PY{p}{[}\PY{n}{j}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{Y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{*} \PY{n}{Y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{Phi}\PY{p}{[}\PY{n}{j}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{*} \PY{n}{Phi}\PY{p}{[}\PY{n}{k}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{} calcualte new w}
+              \PY{n}{W} \PY{o}{=} \PY{n}{W} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{H}\PY{p}{)} \PY{o}{@} \PY{n}{g}
+              \PY{c+c1}{\PYZsh{} construct Y}
+              \PY{k}{for} \PY{n}{n} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{denom} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{W}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{Phi}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{n}\PY{p}{:}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                  \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{:}
+                      \PY{n}{Y}\PY{p}{[}\PY{n}{n}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{W}\PY{o}{.}\PY{n}{T}\PY{p}{[}\PY{n}{k}\PY{p}{:}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]} \PY{o}{@} \PY{n}{Phi}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{n}\PY{p}{:}\PY{n}{n}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{n}{denom}
+              \PY{c+c1}{\PYZsh{} calculate err}
+              \PY{n}{err} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{T} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{Y}\PY{p}{)}\PY{p}{)}
+              \PY{n}{err\PYZus{}record}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{err}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}print(\PYZdq{}Iteration \PYZob{}\PYZcb{}, Error = \PYZob{}\PYZcb{}\PYZdq{}.format(epoch, err))}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}700}]:} \PY{c+c1}{\PYZsh{} Prepare for decision boundary visualization}
+          \PY{n}{x1}\PY{p}{,} \PY{n}{x2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{,} \PY{l+m+mf}{0.02}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{,} \PY{l+m+mf}{0.02}\PY{p}{)}\PY{p}{)}
+          \PY{n}{grid\PYZus{}shape} \PY{o}{=} \PY{n}{x1}\PY{o}{.}\PY{n}{shape}
+          \PY{n}{grid\PYZus{}size} \PY{o}{=} \PY{n}{x1}\PY{o}{.}\PY{n}{size}
+          \PY{n}{prediction} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{p}{(}\PY{n}{W}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{n}{grid\PYZus{}size}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{p}{,} \PY{n}{x1}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{grid\PYZus{}size}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{x2}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{grid\PYZus{}size}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{grid\PYZus{}shape}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}701}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{err\PYZus{}record}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error \PYZhy{} online learning, eta=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{eta}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{contourf}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{prediction}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{y}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{jet}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Decision boundaries}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_50_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It can be seen that three classes are correctly classified through the
+decision boundary.
+
+    \hypertarget{problem-5-fishers-discriminant}{%
+\section{Problem 5: Fishers
+Discriminant}\label{problem-5-fishers-discriminant}}
+
+    \hypertarget{part-a}{%
+\subsection{Part A}\label{part-a}}
+
+Show that maximization of the class separation criterion defined in Eq.
+5 with respect to w, using a Lagrange multiplier to enforce the
+constraint wT w = 1, leads to the result that w ∝ (m2 − m1)
+
+    The idea is to maximize the class separation criterion with the
+constraint that \(\mathbf{w}^T\mathbf{w}=1\), so we use Lagrange
+multiplier to obtain the objective function,
+
+\(L = (m_2 - m_1) - \lambda(\sum_i^M w_i^2 - 1)\)
+
+Substitue equation (4) and (5) and take derivative with respect to
+\(\mathbf{w}\), we obtain the required relation,
+
+\(\mathbf{w} \propto (\mathbf{m}_2 - \mathbf{m}_1)\)
+
+    \hypertarget{part-b}{%
+\subsection{Part B}\label{part-b}}
+
+Show the Fisher Criterion can be written in the form of equation (7).
+
+    The proof is shown below,
+
+\(\begin{align}\mathbf{J}(\mathbf{w})&= \frac{(m_1 - m_2)^2}{s_1^2 + s_2^2}\\&= \frac{(\mathbf{w}^T\mathbf{m_1} - \mathbf{w}^T\mathbf{m_2})^2}{\sum_{n\in C_1}(\mathbf{w}^T\mathbf{x_n} - \mathbf{w}^T\mathbf{m_1})^2 + \sum_{n\in C_2}(\mathbf{w}^T\mathbf{x_n} - \mathbf{w}^T\mathbf{m_2})^2}\\ &=\frac{\mathbf{w}^T(\mathbf{m_1}-\mathbf{m_2})(\mathbf{m_1}-\mathbf{m_2})^T\mathbf{w}}{\mathbf{w}^T(\sum_{n\in C_1}(\mathbf{x_n}-\mathbf{m_1})(\mathbf{x_n}-\mathbf{m_1})^T + \sum_{n\in C_2}(\mathbf{x_n}-\mathbf{m_2})(\mathbf{x_n}-\mathbf{m_2})^T)\mathbf{w}}\\ &=\frac{\mathbf{w}^T\mathbf{S_B}\mathbf{w}}{\mathbf{w}^T\mathbf{S_W}\mathbf{w}}\ \ \text{(QED)}\end{align}\)
+
+    \hypertarget{part-c}{%
+\subsection{Part C}\label{part-c}}
+
+\hypertarget{a-compute-fishers-vector}{%
+\subsubsection{a: Compute Fisher's
+vector}\label{a-compute-fishers-vector}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}702}]:} \PY{n}{p5\PYZus{}data} \PY{o}{=} \PY{n}{loadmat}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{HW3\PYZus{}data/P5/P5.mat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{p5\PYZus{}data}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+dict\_keys(['Xtrain', 'ytrain'])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}703}]:} \PY{n}{Xtrain} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p5\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Xtrain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+          \PY{c+c1}{\PYZsh{}Xtrain = np.concatenate([np.ones((Xtrain.shape[0],1)), Xtrain],axis=1).T}
+          \PY{n}{ytrain} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p5\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ytrain}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}704}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of Xtrain: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Xtrain}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of ytrain: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{ytrain}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of Xtrain: (10, 528)
+Shape of ytrain: (528,)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}705}]:} \PY{c+c1}{\PYZsh{} get number of classes}
+          \PY{n}{K} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{ytrain}\PY{p}{)}
+          \PY{n}{M} \PY{o}{=} \PY{n}{Xtrain}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+          \PY{n}{N} \PY{o}{=} \PY{n}{Xtrain}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    Procedure to compute weights 1. Compute within-class and between class
+covariance
+\(\mathbf{S}_W = \sum_{k=1}^K\mathbf{S}_k,\ \mathbf{S}_k = \sum_{n\in C_k}(\mathbf{x}_n - \mathbf{m}_k)(\mathbf{x}-\mathbf{m}_k)^T,\ \mathbf{m}_k = \frac{1}{N_k}\sum_{n\in C_k}\mathbf{x}_n\)
+\(\mathbf{S}_B = \sum_{k=1}^K N_k(\mathbf{m}_k-\mathbf{m})(\mathbf{m}_k-\mathbf{m})^T\)
+2. Weights can be obtained by
+\(\mathbf{W} = \mathbf{S}_W^{-1/2}\mathbf{U}\) where \(\mathbf{U}\) are
+the \(D'\) leading eigenvectors of
+\(\mathbf{S}_W^{-1/2}\mathbf{S}_B\mathbf{S}_W^{-1/2}\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}706}]:} \PY{c+c1}{\PYZsh{} Calculate total mean}
+          \PY{n}{m} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{Xtrain}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{Xtrain}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} calculate class mean}
+          \PY{n}{m\PYZus{}c} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{K}\PY{p}{)}\PY{p}{)}
+          \PY{n}{k\PYZus{}count} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{K}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+              \PY{n}{k} \PY{o}{=} \PY{n}{ytrain}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+              \PY{n}{k\PYZus{}count}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+              \PY{n}{m\PYZus{}c}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{=} \PY{n}{m\PYZus{}c}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{+} \PY{n}{Xtrain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]}
+          \PY{n}{m\PYZus{}c} \PY{o}{=} \PY{n}{m\PYZus{}c}\PY{o}{/}\PY{n}{k\PYZus{}count}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}707}]:} \PY{c+c1}{\PYZsh{} Compute within\PYZhy{}class covariance}
+          \PY{n}{S\PYZus{}W} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{:}
+              \PY{n}{k} \PY{o}{=} \PY{n}{ytrain}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}
+              \PY{n}{S\PYZus{}W} \PY{o}{+}\PY{o}{=} \PY{p}{(}\PY{n}{Xtrain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{m\PYZus{}c}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{:}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)} \PY{o}{@} \PY{p}{(}\PY{n}{Xtrain}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{m\PYZus{}c}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{:}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+          
+          \PY{c+c1}{\PYZsh{} Compute between\PYZhy{}class covariance}
+          \PY{n}{S\PYZus{}B} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{M}\PY{p}{,}\PY{n}{M}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{K}\PY{p}{)}\PY{p}{:}
+              \PY{n}{S\PYZus{}B} \PY{o}{+}\PY{o}{=} \PY{n}{k\PYZus{}count}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{k}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{n}{m\PYZus{}c}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{:}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)} \PY{o}{@} \PY{p}{(}\PY{n}{m\PYZus{}c}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{k}\PY{p}{:}\PY{n}{k}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{m}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}708}]:} \PY{c+c1}{\PYZsh{} Compute U}
+          \PY{n}{w}\PY{p}{,}\PY{n}{vr} \PY{o}{=} \PY{n}{linalg}\PY{o}{.}\PY{n}{eig}\PY{p}{(}\PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{linalg}\PY{o}{.}\PY{n}{sqrtm}\PY{p}{(}\PY{n}{S\PYZus{}W}\PY{p}{)}\PY{p}{)} \PY{o}{@} \PY{n}{S\PYZus{}B} \PY{o}{@} \PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{linalg}\PY{o}{.}\PY{n}{sqrtm}\PY{p}{(}\PY{n}{S\PYZus{}W}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{D} \PY{o}{=} \PY{l+m+mi}{2}
+          \PY{n}{U} \PY{o}{=} \PY{n}{vr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{n}{D}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}709}]:} \PY{c+c1}{\PYZsh{} Compute W}
+          \PY{n}{W} \PY{o}{=} \PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{linalg}\PY{o}{.}\PY{n}{sqrtm}\PY{p}{(}\PY{n}{S\PYZus{}W}\PY{p}{)}\PY{p}{)} \PY{o}{@} \PY{n}{U}
+\end{Verbatim}
+
+
+    \hypertarget{part-b-project-to-2d-and-observe-data}{%
+\section{Part B: Project to 2D and observe
+data}\label{part-b-project-to-2d-and-observe-data}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}710}]:} \PY{n}{Y} \PY{o}{=} \PY{n}{W}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{Xtrain}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}717}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{Y}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{ytrain}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Project to 2D using FLDA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_69_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    From the projected 2D data, it is difficult to identify the number of
+classes without showing the colors. However, the resulting 2D scatter
+resembles that from the PMTK example.
+
+    \hypertarget{problem-6-bayesian-logistic-regression}{%
+\section{Problem 6: Bayesian logistic
+regression}\label{problem-6-bayesian-logistic-regression}}
+
+    \hypertarget{part-a-gaussian-approximation}{%
+\subsection{Part A: Gaussian
+approximation}\label{part-a-gaussian-approximation}}
+
+    Given the likelihood and prior,
+
+\(p(\mathbf{t}|\mathbf{w}) = \prod_{n=1}^N y_n^{t_n}(1-y_n)^{1-t_n}\)
+
+\(p(\mathbf{w}) = \mathcal{N}(\mathbf{w}|\mathbf{0},\mathbf{V_0})\)
+
+we can write the log-posterior as,
+
+\(\ln p(\mathbf{w}|\mathbf{t}) \propto -\frac{1}{2}\mathbf{w}\mathbf{V}_0^{-1}\mathbf{w} + \sum_{n=1}^N\{t_n\ln y_n + (1-t_n\ln (1-y_n)\} + \text{const}\)
+
+Fro Gaussian approximation, we obtain its MAP estimate by taking
+derivatives against \(\mathbf{w}\), from which we obtain,
+
+\(\mathbf{m}_{\text{map}} = \sum_{n=1}^N (y_n - t_n)\boldsymbol{\phi_n}\mathbf{V_0}\)
+
+Then the covariance is given by the inverse of the matrix of 2nd
+derivatives of the negative likelihood.
+
+\(\mathbf{S}_N^{-1} = \mathbf{V_0}^{-1} + \sum_{n=1}^N y_n(1-y_n)\boldsymbol{\phi_n}\boldsymbol{\phi_n}^T\)
+
+Finally we obtain the \emph{Gaussian approximation for the posterior},
+
+\(q(\mathbf{w}) = \mathcal{N}(\mathbf{w}|\mathbf{m}_\text{map}, \mathbf{S}_N)\)
+
+    \hypertarget{part-b}{%
+\subsection{Part B}\label{part-b}}
+
+Provide an approximation for the posterior predictive using a Monte
+Carlo approximation as well as the probit approximation.
+
+    \hypertarget{mc-approximation}{%
+\subsubsection{MC Approximation}\label{mc-approximation}}
+
+From the solution from Part A, the posterior predictive is presented as,
+
+\(p(C_1|\boldsymbol{\phi},\mathbf{t}) = \int p(C_1|\boldsymbol{\phi},\mathbf{w})p(\mathbf{w}|\mathbf{t})d\mathbf{w} \approx \frac{1}{S}\sum_{s=1}^S \sigma(\mathbf{w}^{sT}\boldsymbol{\phi}(\mathbf{x}))\)
+
+where \(\mathbf{w}^{s}\sim p(\mathbf{w}|\mathbf{t})\) from sampling.
+
+\hypertarget{probit-approximation}{%
+\subsubsection{Probit Approximation}\label{probit-approximation}}
+
+By applying delta function and approximate the sigmoid function with the
+inverse probit function, we obtian the predictive posterior as,
+
+\(p(C_1|\boldsymbol{\phi},\mathbf{t}) \approx \int \sigma(a)\mathcal{N}(a|\mu_a, \sigma_a^2) = \sigma(\kappa(\sigma_a^2)\mu),\ \ \kappa(\sigma^2) = (1+\frac{\pi\sigma^2}{8})^{-1/2}\)
+
+where
+
+\(\sigma_a^2 = \boldsymbol{\phi}^T\mathbf{S}_N\boldsymbol{\phi}\)
+
+\(\mu_a = \mathbf{w}_\text{map}^T \boldsymbol{\phi}\)
+
+    \hypertarget{part-c}{%
+\subsection{Part C}\label{part-c}}
+
+For the data set given in this link, write a code for computing the
+posterior based on the Laplace approximation. Plot the log-likelihood,
+log-unnormalized posterior and Laplace approximation to the posterior.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}720}]:} \PY{c+c1}{\PYZsh{} Load data}
+          \PY{n}{p6\PYZus{}data} \PY{o}{=} \PY{n}{loadmat}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HW3\PYZus{}data/P6/P6.mat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{p6\PYZus{}data}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+dict\_keys(['X', 'Xgrid', 'alpha', 't'])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}721}]:} \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p6\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{Xgrid} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p6\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Xgrid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n}{alpha} \PY{o}{=} \PY{n}{p6\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alpha}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{t} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n}{p6\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{t}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          
+          \PY{n}{M} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{N} \PY{o}{=} \PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}722}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of X: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of Xgrid: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{Xgrid}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Shape of t: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{t}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Shape of X: (60, 2)
+Shape of Xgrid: (25921, 2)
+Shape of t: (60, 1)
+
+    \end{Verbatim}
+
+    \hypertarget{compute-the-posterior-based-on-laplace-approximation}{%
+\subsubsection{Compute the posterior based on Laplace
+approximation}\label{compute-the-posterior-based-on-laplace-approximation}}
+
+Use SGD for \(\mathbf{m}_{\text{map}}\), then we can obtain the
+covariance and the posterior as,
+
+\(\mathbf{S}_N^{-1} = \mathbf{V_0}^{-1} + \sum_{n=1}^N y_n(1-y_n)\boldsymbol{\phi_n}\boldsymbol{\phi_n}^T\)
+
+\(q(\mathbf{w}) = \mathcal{N}(\mathbf{w}|\mathbf{m}_\text{map}, \mathbf{S}_N)\)
+
+    MAP estimate of m is obtained through root finding.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}723}]:} \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{2000}
+          \PY{n}{eta} \PY{o}{=} \PY{l+m+mf}{0.0005}
+          \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ones}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+          \PY{n}{err\PYZus{}record} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{p\PYZus{}record} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+              \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{X} \PY{o}{@} \PY{n}{w}\PY{p}{)}\PY{p}{)}
+              \PY{n}{g} \PY{o}{=} \PY{n}{w}\PY{o}{/}\PY{n}{alpha} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{t}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{T} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+              \PY{c+c1}{\PYZsh{}HV = 1/alpha + np.sum([y[i,0] * (1\PYZhy{}y[i,0]) * (X[i:i+1,:].T @ X[i:i+1]) for i in range(N)], axis=0)}
+              \PY{n}{w} \PY{o}{=} \PY{n}{w} \PY{o}{\PYZhy{}} \PY{n}{eta} \PY{o}{*} \PY{n}{g}
+              \PY{n}{err} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{w}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{w}\PY{p}{)} \PY{o}{/}\PY{n}{alpha} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{t}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*}\PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+              \PY{n}{err\PYZus{}record}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{err}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}724}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{err\PYZus{}record}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Error}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Error \PYZhy{} online learning, eta=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, err=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{, w=}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{eta}\PY{p}{,} \PY{n}{err}\PY{p}{,} \PY{n}{w}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_83_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}725}]:} \PY{n}{m\PYZus{}map} \PY{o}{=} \PY{n}{w}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{X}\PY{n+nd}{@m\PYZus{}map}\PY{p}{)}\PY{p}{)}
+          \PY{n}{S\PYZus{}N} \PY{o}{=} \PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{/}\PY{n}{alpha} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{*} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{X}\PY{p}{[}\PY{n}{i}\PY{p}{:}\PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{]} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    The log-likelihood, log-unnormalized posterior and Laplace approximation
+to the posterior are then obtained as,
+
+\(\ln p(\mathbf{t}|\mathbf{w}) = \sum_{n=1}^N\{t_n\ln y_n + (1-t_n)\ln (1-y_n)\}\)
+
+\(\ln p(\mathbf{w}|\mathbf{t}) \propto -\frac{1}{2}\mathbf{w}\mathbf{V}_0^{-1}\mathbf{w} + \sum_{n=1}^N\{t_n\ln y_n + (1-t_n)\ln (1-y_n)\} + \text{const.}\)
+
+\(q(\mathbf{w}) = \mathcal{N}(\mathbf{w}|\mathbf{m}_\text{map}, \mathbf{S}_N)\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}726}]:} \PY{n}{Nw} \PY{o}{=} \PY{l+m+mi}{100}
+          \PY{n}{w1}\PY{p}{,} \PY{n}{w2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{n}{Nw}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{n}{Nw}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ll} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{Nw}\PY{p}{,} \PY{n}{Nw}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} Log\PYZhy{}likelihood}
+          \PY{n}{ln} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{Nw}\PY{p}{,} \PY{n}{Nw}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} log unnormalized posterior}
+          \PY{n}{la} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{Nw}\PY{p}{,} \PY{n}{Nw}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} posterior with laplace approximation}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}727}]:} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Nw}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Nw}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{w} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{w1}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{w2}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{y} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{X} \PY{o}{@} \PY{n}{w}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{ll}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{t}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{ln}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{*} \PY{l+m+mi}{1}\PY{o}{/}\PY{n}{alpha} \PY{o}{*} \PY{n}{w}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{w} \PY{o}{+}  \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{[}\PY{n}{t}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{+} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{t}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{o}{*} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{y}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{N}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{la}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2} \PY{o}{*} \PY{p}{(}\PY{n}{w} \PY{o}{\PYZhy{}} \PY{n}{m\PYZus{}map}\PY{p}{)}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{linalg}\PY{o}{.}\PY{n}{inv}\PY{p}{(}\PY{n}{S\PYZus{}N}\PY{p}{)} \PY{o}{@} \PY{p}{(}\PY{n}{w} \PY{o}{\PYZhy{}} \PY{n}{m\PYZus{}map}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/senwang/miniconda3/envs/basemap/lib/python3.6/site-packages/ipykernel\_launcher.py:5: RuntimeWarning: divide by zero encountered in log
+  """
+/Users/senwang/miniconda3/envs/basemap/lib/python3.6/site-packages/ipykernel\_launcher.py:6: RuntimeWarning: divide by zero encountered in log
+  
+/Users/senwang/miniconda3/envs/basemap/lib/python3.6/site-packages/ipykernel\_launcher.py:5: RuntimeWarning: invalid value encountered in multiply
+  """
+/Users/senwang/miniconda3/envs/basemap/lib/python3.6/site-packages/ipykernel\_launcher.py:6: RuntimeWarning: invalid value encountered in multiply
+  
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}729}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{contourf}\PY{p}{(}\PY{n}{w1}\PY{p}{,} \PY{n}{w2}\PY{p}{,} \PY{n}{ll}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Log\PYZhy{}likelihood}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{contourf}\PY{p}{(}\PY{n}{w1}\PY{p}{,} \PY{n}{w2}\PY{p}{,} \PY{n}{ln}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Log\PYZhy{}unnormalized posterior}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{contourf}\PY{p}{(}\PY{n}{w1}\PY{p}{,} \PY{n}{w2}\PY{p}{,} \PY{n}{la}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Laplace approximation to the posterior}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_88_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The white region and the warning shown above is due to \(y\) value when
+\(a=\mathbf{w}^T\mathbf{x} << 0\), which gives \(\ln(1-y_n) = \ln(0)\)
+
+    \hypertarget{part-d}{%
+\subsection{Part D}\label{part-d}}
+
+Write a code for computing the posterior predictive distribution using
+MC approximation. Draw samples from the posterior predictive
+distribution and compute average over the samples. Recompute the
+posterior using probit approximation and compare the results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}584}]:} \PY{n}{Nx} \PY{o}{=} \PY{l+m+mi}{100}
+          \PY{n}{x1}\PY{p}{,} \PY{n}{x2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{meshgrid}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{n}{Nw}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{8}\PY{p}{,}\PY{n}{Nw}\PY{p}{)}\PY{p}{)}
+          \PY{n}{XX} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{concatenate}\PY{p}{(}\PY{p}{[}\PY{n}{x1}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{Nx}\PY{o}{*}\PY{n}{Nx}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{x2}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{Nx}\PY{o}{*}\PY{n}{Nx}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{mc-approximation}{%
+\subsubsection{MC approximation}\label{mc-approximation}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}586}]:} \PY{c+c1}{\PYZsh{} Draw samples of w for MC approximation}
+          \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{import} \PY{n}{multivariate\PYZus{}normal}
+          \PY{n}{mc\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{20}
+          \PY{n}{w\PYZus{}mc} \PY{o}{=} \PY{n}{multivariate\PYZus{}normal}\PY{o}{.}\PY{n}{rvs}\PY{p}{(}\PY{n}{mean}\PY{o}{=}\PY{n}{m\PYZus{}map}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{cov}\PY{o}{=}\PY{n}{S\PYZus{}N}\PY{p}{,} \PY{n}{size}\PY{o}{=}\PY{n}{mc\PYZus{}size}\PY{p}{)}
+          \PY{n}{p\PYZus{}mc} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{Nw}\PY{p}{,} \PY{n}{Nw}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{mc\PYZus{}size}\PY{p}{)}\PY{p}{:}
+              \PY{n}{p\PYZus{}mc} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{XX} \PY{o}{@} \PY{n}{w\PYZus{}mc}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{Nw}\PY{p}{,}\PY{n}{Nw}\PY{p}{)}\PY{p}{)}
+          \PY{n}{p\PYZus{}mc} \PY{o}{=} \PY{n}{p\PYZus{}mc}\PY{o}{/}\PY{n}{mc\PYZus{}size}
+\end{Verbatim}
+
+
+    \hypertarget{probit-approximation}{%
+\subsubsection{Probit Approximation}\label{probit-approximation}}
+
+\(p(C_1|\boldsymbol{\phi},\mathbf{t}) \approx \int \sigma(a)\mathcal{N}(a|\mu_a, \sigma_a^2) = \sigma(\kappa(\sigma_a^2)\mu),\ \ \kappa(\sigma^2) = (1+\frac{\pi\sigma^2}{8})^{-1/2}\)
+
+where
+
+\(\sigma_a^2 = \boldsymbol{\phi}^T\mathbf{S}_N\boldsymbol{\phi}\)
+
+\(\mu_a = \mathbf{w}_\text{map}^T \boldsymbol{\phi}\)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}600}]:} \PY{n}{p\PYZus{}pb} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{Nx}\PY{p}{,}\PY{n}{Nx}\PY{p}{)}\PY{p}{)}
+          \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Nw}\PY{p}{)}\PY{p}{:}
+              \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{Nw}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{n}{x1}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{n}{x2}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                  \PY{n}{mu\PYZus{}a} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{m\PYZus{}map}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{x}\PY{p}{)}
+                  \PY{n}{sigma\PYZus{}a2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{T} \PY{o}{@} \PY{n}{S\PYZus{}N} \PY{o}{@} \PY{n}{x}\PY{p}{)}
+                  \PY{n}{a} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{pi} \PY{o}{*} \PY{n}{sigma\PYZus{}a2}\PY{o}{/}\PY{l+m+mi}{8}\PY{p}{)}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{o}{/}\PY{l+m+mi}{2}\PY{p}{)} \PY{o}{*} \PY{n}{mu\PYZus{}a}
+                  \PY{n}{p\PYZus{}pb}\PY{p}{[}\PY{n}{i}\PY{p}{,}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{+}\PY{n}{np}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{a}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}602}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{15}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{n}{t}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{p\PYZus{}mc}\PY{p}{,} \PY{n}{levels}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MC approximation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{X}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{c}\PY{o}{=}\PY{n}{t}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{contour}\PY{p}{(}\PY{n}{x1}\PY{p}{,} \PY{n}{x2}\PY{p}{,} \PY{n}{p\PYZus{}pb}\PY{p}{,} \PY{n}{levels}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{axes}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Probit approximation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_96_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    It can be observed from the plots above, that both approximation gives a
+pretty good result in classfication, but the MC approximation has
+smaller variance of the decision boundary as compared to that of the
+probit approximation.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

@@ -1,0 +1,1 @@
+Variables: X (training input), t (training target), Xgrid (to use used for prediction/plot), alpha (variance of prior = 1/lambda)
